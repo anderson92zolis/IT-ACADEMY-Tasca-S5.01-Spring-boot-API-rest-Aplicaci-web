@@ -6,11 +6,11 @@ import java.util.List;
 public interface BranchServicesInterface {
     List<Branch> getAllPosts();
 
-    Branch createPost(Branch branch);
+    Branch createBranch(Branch branch);
 
-    Branch updatePost(Integer id, Branch branch);
+    Branch updateBranch(Integer id, Branch branch);
 
-    void deletePost(Integer id);
+    void deleteBranch(Integer id);
 
     Branch getPostById(Integer id);
 }
