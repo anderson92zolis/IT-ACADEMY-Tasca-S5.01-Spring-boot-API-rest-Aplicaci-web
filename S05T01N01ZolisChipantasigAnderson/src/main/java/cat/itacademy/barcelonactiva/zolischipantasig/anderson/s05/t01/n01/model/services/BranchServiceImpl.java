@@ -2,7 +2,7 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.repository.BranchRepository;
-import net.javaguides.springboot.exception.ResourceNotFoundException;
+import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.exceptions.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;

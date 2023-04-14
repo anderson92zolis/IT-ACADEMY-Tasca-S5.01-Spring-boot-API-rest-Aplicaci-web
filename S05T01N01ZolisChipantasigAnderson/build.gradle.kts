@@ -19,10 +19,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.projectlombok:lombok:1.18.26")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+	implementation("org.modelmapper:modelmapper:3.1.1")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+
 
 tasks.withType<Test> {
 	useJUnitPlatform()
