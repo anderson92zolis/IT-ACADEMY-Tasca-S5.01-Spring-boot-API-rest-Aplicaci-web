@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Branch {
 
 
-    //Llave primaria de la tabla
+    // Llave primaria de la tabla
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pk_BranchID;
@@ -24,8 +24,7 @@ public class Branch {
     public Branch() {
     }
 
-    public Branch(Integer pk_BranchID, String branchName, String branchCountry) {
-        this.pk_BranchID = pk_BranchID;
+    public Branch(String branchName, String branchCountry) {
         this.branchName = branchName;
         this.branchCountry = branchCountry;
     }

@@ -4,6 +4,7 @@ import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.exceptions.ResourceNotFoundException;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.repository.BranchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Service
 public class BranchServiceImpl implements BranchServicesInterface{
 
+    @Autowired
     private BranchRepository branchRepository;
 
     public BranchServiceImpl (BranchRepository branchRepository){

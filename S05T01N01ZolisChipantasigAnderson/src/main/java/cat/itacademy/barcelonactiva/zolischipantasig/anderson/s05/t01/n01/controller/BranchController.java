@@ -21,6 +21,7 @@ public class BranchController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
     private BranchServiceImpl branchServiceImpl;
 
     public BranchController (BranchServiceImpl branchServiceImpl){
