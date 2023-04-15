@@ -53,9 +53,9 @@ public class BranchController {
         Branch branch = branchServiceImpl.updateBranch(id, branchRequest);
 
         // entity to DTO
-        BranchDto postResponse = modelMapper.map(branch, BranchDto.class);
+        BranchDto branchResponse = modelMapper.map(branch, BranchDto.class);
 
-        return ResponseEntity.ok().body(postResponse);
+        return ResponseEntity.ok().body(branchResponse);
     }
 
 
@@ -66,7 +66,7 @@ public class BranchController {
 
         if (checkId.getStatusCode() == HttpStatus.OK) {
             branchServiceImpl.deleteBranch(id);
-            return new ResponseEntity<>(new Message("Fruit deleted."), HttpStatus.OK);
+            return new ResponseEntity<>(new Message("Branch deleted."), HttpStatus.OK);
         } else {
             return checkId;
         }

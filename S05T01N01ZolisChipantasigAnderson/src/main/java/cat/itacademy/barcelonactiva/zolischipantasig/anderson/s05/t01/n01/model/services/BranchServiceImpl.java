@@ -34,11 +34,11 @@ public class BranchServiceImpl implements BranchServicesInterface{
     }
 
     @Override
-    public Branch updateBranch(Integer id, Branch branchDto) {
+    public Branch updateBranch(Integer id, Branch branchRequest) {
         Branch branckFromDB = branchRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Branch", "id", id));
 
-        branckFromDB.setBranchName(branchDto.getBranchName());
-        branckFromDB.setBranchCountry(branchDto.getBranchCountry());
+        branckFromDB.setBranchName(branchRequest.getBranchName());
+        branckFromDB.setBranchCountry(branchRequest.getBranchCountry());
 
         return branchRepository.save(branckFromDB);
     }

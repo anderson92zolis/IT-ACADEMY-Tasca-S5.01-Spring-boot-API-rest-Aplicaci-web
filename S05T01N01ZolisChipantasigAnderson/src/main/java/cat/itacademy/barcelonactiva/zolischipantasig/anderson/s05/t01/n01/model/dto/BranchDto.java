@@ -1,6 +1,8 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto;
 
+import java.util.Arrays;
 import java.util.Objects;
+
 
 public class BranchDto {
 
@@ -11,6 +13,9 @@ public class BranchDto {
     private String branchName;
 
     private String branchCountry;
+
+
+    private String branchType;
 
     // constructor
     public BranchDto() {
@@ -49,25 +54,30 @@ public class BranchDto {
     public void setBranchCountry(String branchCountry) {
         this.branchCountry = branchCountry;
     }
+    public void setBranchType(String branchType) {
+        this.branchType = branchType;
+    }
 
     // METHOD TO KNOW IF COUNTRY IN PART OF EU
 
-    public static boolean isCountryInEU(String country) {
+    public void isCountryInEU(String country) {
+
         // Define an array of EU member countries
+
         String[] euCountries = {"Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark",
                 "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy",
                 "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal",
                 "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"};
 
         // Check if the given country is in the array of EU member countries
-        for (String euCountry : euCountries) {
-            if (euCountry.equals(country)) {
-                return true;
-            }
+        String outsideOfEu= "Outside of Eu";
+        boolean isInsideEU = Arrays.stream(euCountries).
+                anyMatch(c -> c.equalsIgnoreCase(country));
+        if (isInsideEU = true){
+            setBranchType("EU");
+        } else {
+            setBranchType(outsideOfEu);
         }
-
-        // If the given country is not in the array of EU member countries, return false
-        return false;
     }
 
 
