@@ -88,7 +88,8 @@ public class BranchController {
     @GetMapping("/getAll")
     public List<BranchDto> getAllPosts() {
 
-        return branchServiceImpl.getAllPosts().stream().map(post -> modelMapper.map(post, BranchDto.class))
+        return branchServiceImpl.getAllPosts().stream()
+                .map(post -> modelMapper.map(post, BranchDto.class))
                 .collect(Collectors.toList());
     }
 

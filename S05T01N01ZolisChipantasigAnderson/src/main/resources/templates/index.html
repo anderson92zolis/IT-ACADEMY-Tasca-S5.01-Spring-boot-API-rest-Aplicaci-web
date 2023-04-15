@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sucursal Management System</title>
+</head>
+
+<body>
+<div align= "center">
+    <h1> Sucursal list </h1>
+    <table >
+        <thead>
+            <tr>
+                <th>  pk_SucursalID </th>
+                <th>  nomSucursal </th>
+                <th>  paisSucursal </th>
+                <th>  tipusSucursal </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each=" sucursal : ${getAllPosts()}">
+                <td th:text="${sucursal.getPk_BranchID()}" >
+                <td th:text="${sucursal.getBranchName()}" >
+                <td th:text="${sucursal.getBranchCountry()}" >
+                <td th:text="${sucursal.getBranchType()}" >
+            </tr>
+        </tbody>
+    </table >
+
+</div>
+
+</body>
+
+
+</html>

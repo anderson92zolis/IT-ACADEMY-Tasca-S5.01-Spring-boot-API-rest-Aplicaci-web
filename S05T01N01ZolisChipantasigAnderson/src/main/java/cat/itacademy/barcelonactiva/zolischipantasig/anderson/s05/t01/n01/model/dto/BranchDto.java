@@ -15,6 +15,8 @@ public class BranchDto {
     private String branchCountry;
 
 
+
+
     private String branchType;
 
     // constructor
@@ -38,6 +40,9 @@ public class BranchDto {
 
     public String getBranchCountry() {
         return branchCountry;
+    }
+    public String getBranchType() {
+        return branchType;
     }
 
     //setter
