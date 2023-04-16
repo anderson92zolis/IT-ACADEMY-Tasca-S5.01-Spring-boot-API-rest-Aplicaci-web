@@ -30,7 +30,7 @@ public class BranchController {
 
     //add a new branch
     @PostMapping("/add")
-    public ResponseEntity<BranchDto> createPost(@RequestBody BranchDto branchDto) {
+    public ResponseEntity<BranchDto> createBranch(@RequestBody BranchDto branchDto) {
 
         // convert DTO to entity
         Branch branchRequest = modelMapper.map(branchDto, Branch.class);
@@ -45,7 +45,7 @@ public class BranchController {
 
     // update an existing branch
     @PutMapping("/update/{id}")
-    public ResponseEntity<BranchDto> updatePost(@PathVariable int id, @RequestBody BranchDto branchDto) {
+    public ResponseEntity<BranchDto> updateBranch(@PathVariable int id, @RequestBody BranchDto branchDto) {
 
         // convert DTO to Entity
         Branch branchRequest = modelMapper.map(branchDto, Branch.class);
@@ -61,7 +61,7 @@ public class BranchController {
 
     // delete an existing branch
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Message> deleteFruita(@PathVariable int id) {
+    public ResponseEntity<Message> deleteBranch(@PathVariable int id) {
         ResponseEntity<Message> checkId = branchServiceImpl.validateBranchId(id);
 
         if (checkId.getStatusCode() == HttpStatus.OK) {
@@ -75,8 +75,8 @@ public class BranchController {
 
     //read an branch
     @GetMapping("/getOne/{id}")
-    public ResponseEntity<BranchDto> getPostById(@PathVariable(name = "id") int id) {
-        Branch branch = branchServiceImpl.getPostById(id);
+    public ResponseEntity<BranchDto> getBranchById(@PathVariable(name = "id") int id) {
+        Branch branch = branchServiceImpl.getBranchById(id);
 
         // convert entity to DTO
         BranchDto postResponse = modelMapper.map(branch, BranchDto.class);
@@ -86,15 +86,24 @@ public class BranchController {
 
     // read all branches
     @GetMapping("/getAll")
-    public List<BranchDto> getAllPosts() {
+    public List<BranchDto> getAllBranch() {
 
-        return branchServiceImpl.getAllPosts().stream()
+        return branchServiceImpl.getAllBranches().stream()
                 .map(post -> modelMapper.map(post, BranchDto.class))
                 .collect(Collectors.toList());
     }
 
+    // to the web
 
 
+    /*
+     @GetMapping(value = {"/getAll1", ""})
+    public String index(Model model){
+        model.addAttribute("listSucursales", branchServiceImpl.getAllBranches());
+        return "listSucursales";
+    }
 
+    */
 
 }
+

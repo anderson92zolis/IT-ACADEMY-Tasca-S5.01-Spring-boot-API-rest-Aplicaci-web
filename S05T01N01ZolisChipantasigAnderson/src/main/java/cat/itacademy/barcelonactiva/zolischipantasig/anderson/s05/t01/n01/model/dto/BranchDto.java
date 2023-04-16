@@ -14,9 +14,6 @@ public class BranchDto {
 
     private String branchCountry;
 
-
-
-
     private String branchType;
 
     // constructor

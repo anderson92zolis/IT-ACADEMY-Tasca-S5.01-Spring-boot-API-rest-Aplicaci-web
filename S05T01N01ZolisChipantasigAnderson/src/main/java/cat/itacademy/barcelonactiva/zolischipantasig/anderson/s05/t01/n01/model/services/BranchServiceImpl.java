@@ -23,10 +23,7 @@ public class BranchServiceImpl implements BranchServicesInterface{
         this.branchRepository= branchRepository;
     }
 
-    @Override
-    public List<Branch> getAllPosts() {
-        return branchRepository.findAll();
-    }
+
 
     @Override
     public Branch createBranch(Branch branch) {
@@ -53,13 +50,18 @@ public class BranchServiceImpl implements BranchServicesInterface{
     }
 
     @Override
-    public Branch getPostById(Integer id) {
+    public Branch getBranchById(Integer id) {
         Optional<Branch> result = branchRepository.findById(id);
         if(result.isPresent()) {
             return result.get();
         }else {
             throw new ResourceNotFoundException("Post", "id", id);
         }
+    }
+
+    @Override
+    public List<Branch> getAllBranches() {
+        return branchRepository.findAll();
     }
 
     public ResponseEntity<Message> validateBranchId(int id) {

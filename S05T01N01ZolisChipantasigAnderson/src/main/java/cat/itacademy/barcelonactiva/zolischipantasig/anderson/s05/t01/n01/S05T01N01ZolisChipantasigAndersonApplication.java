@@ -16,5 +16,4 @@ public class S05T01N01ZolisChipantasigAndersonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(S05T01N01ZolisChipantasigAndersonApplication.class, args);
 	}
-
 }

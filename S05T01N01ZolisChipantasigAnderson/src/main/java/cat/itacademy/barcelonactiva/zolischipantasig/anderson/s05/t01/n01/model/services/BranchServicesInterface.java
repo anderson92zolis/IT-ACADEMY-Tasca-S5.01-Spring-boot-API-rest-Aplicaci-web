@@ -4,7 +4,7 @@ import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.
 import java.util.List;
 
 public interface BranchServicesInterface {
-    List<Branch> getAllPosts();
+    List<Branch> getAllBranches();
 
     Branch createBranch(Branch branch);
 
@@ -12,5 +12,5 @@ public interface BranchServicesInterface {
 
     void deleteBranch(Integer id);
 
-    Branch getPostById(Integer id);
+    Branch getBranchById(Integer id);
 }
