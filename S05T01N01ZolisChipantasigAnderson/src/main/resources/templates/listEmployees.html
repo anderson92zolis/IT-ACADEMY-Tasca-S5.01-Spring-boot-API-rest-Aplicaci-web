@@ -22,7 +22,6 @@
             <th>ID</th>
             <th>Name</th>
             <th>Country</th>
-            <th>EU / outside EU</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -31,9 +30,8 @@
             <td th:text = "${branch.pk_BranchID}"></td>
             <td th:text="${branch.branchName}"></td>
             <td th:text="${branch.branchCountry}"></td>
-            <td th:text="${branch.branchType}"></td>
-            <td> <a th:href="@{/showFormForUpdate/{id}(id=${branch.id})}" class="btn btn-primary">Update</a>
-                 <a th:href="@{/deleteEmployee/{id}(id=${branch.id})}" class="btn btn-danger">Delete</a>
+            <td> <a th:href="@{/showFormForUpdate/{id}(id=${branch.pk_BranchID})}" class="btn btn-primary">Update</a>
+                 <a th:href="@{/deleteEmployee/{id}(id=${branch.pk_BranchID})}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         </tbody>

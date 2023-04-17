@@ -3,12 +3,13 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.contr
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services.BranchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/sucursal")
 public class BranchController {
 
@@ -98,12 +99,11 @@ public class BranchController {
 
     // endpoints for thymeleaf
 
-    @GetMapping(value = "/listEmployees")
-    public String listEmployees(Model model) {
+    @GetMapping(value= {"/listEmployees",""})
+    public String viewBranchOffices(Model model) {
         List<Branch> listBranches= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
         model.addAttribute("listEmployees", listBranches);
-        model.addAttribute("listEmployees", listBranches);
-        return "listEmployees.html";
+        return "listEmployees";
     }
 
     @GetMapping("/showNewEmployeeForm")

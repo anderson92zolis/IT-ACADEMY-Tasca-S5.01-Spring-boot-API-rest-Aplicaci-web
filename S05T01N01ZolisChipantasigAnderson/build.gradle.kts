@@ -8,6 +8,7 @@ group = "cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
+
 repositories {
 	mavenCentral()
 	maven { url = uri("https://repo.spring.io/milestone") }
@@ -19,10 +20,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.projectlombok:lombok:1.18.26")
+	compileOnly("org.projectlombok:lombok")
 	implementation("org.modelmapper:modelmapper:3.1.1")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.boot:spring-boot-starter-validation") //VALIDATION ANNOTATIONS (NOTNULL, MIN...)
+
 }
 
 
