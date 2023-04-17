@@ -3,11 +3,12 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "sucursal")
-public class Branch {
+public class Branch implements Serializable {
 
 
     // Llave primaria de la tabla

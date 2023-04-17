@@ -1,25 +1,21 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.controller;
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
-import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.BranchDto;
-import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services.BranchServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 @RestController
 @RequestMapping("/sucursal")
 public class BranchController {
 
+    /*
     @Autowired
     private ModelMapper modelMapper;
+     */
 
     @Autowired
     private BranchServiceImpl branchServiceImpl;
@@ -27,6 +23,9 @@ public class BranchController {
     public BranchController (BranchServiceImpl branchServiceImpl){
         this.branchServiceImpl=branchServiceImpl;
     }
+
+    /*
+
 
     //add a new branch
     @PostMapping("/add")
@@ -95,15 +94,53 @@ public class BranchController {
 
     // to the web
 
+    */
 
-    /*
-     @GetMapping(value = {"/getAll1", ""})
-    public String index(Model model){
-        model.addAttribute("listSucursales", branchServiceImpl.getAllBranches());
-        return "listSucursales";
+    // endpoints for thymeleaf
+
+    @GetMapping(value = "/listEmployees")
+    public String listEmployees(Model model) {
+        List<Branch> listBranches= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
+        model.addAttribute("listEmployees", listBranches);
+        model.addAttribute("listEmployees", listBranches);
+        return "listEmployees.html";
     }
 
-    */
+    @GetMapping("/showNewEmployeeForm")
+    public String showNewEmployeeForm(Model model) {
+        // create model attribute to bind form data
+        Branch branch = new Branch();
+        model.addAttribute("employee", branch);
+        return "new_employee";
+    }
+
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Branch branch) {
+        // save employee to database
+        branchServiceImpl.createBranch(branch);
+        return "redirect:/";
+    }
+
+    @GetMapping("/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") Integer id, Model model) {
+
+        // get employee from the service
+        Branch employee = branchServiceImpl.getBranchById(id);
+
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("employee", employee);
+        return "update_employee";
+    }
+
+    @GetMapping("/deleteEmployee/{id}")
+    public String deleteEmployee(@PathVariable(value = "id") Integer id) {
+
+        // call delete employee method
+        this.branchServiceImpl.deleteBranch(id);
+        return "redirect:/";
+    }
+
+
 
 }
 

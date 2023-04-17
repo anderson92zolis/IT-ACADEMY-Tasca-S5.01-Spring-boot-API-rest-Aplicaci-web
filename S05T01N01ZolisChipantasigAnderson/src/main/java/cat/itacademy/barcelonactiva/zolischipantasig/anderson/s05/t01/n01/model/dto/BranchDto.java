@@ -1,10 +1,11 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
 
-public class BranchDto {
+public class BranchDto implements Serializable {
 
 
     // Llave primaria de la tabla
