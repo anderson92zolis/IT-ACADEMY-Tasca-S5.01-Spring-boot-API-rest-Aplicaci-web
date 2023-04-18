@@ -1,10 +1,13 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.controller;
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
+import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.BranchDto;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services.BranchServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -114,33 +117,40 @@ public class BranchController {
         return "new_employee";
     }
 
-    @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Branch branch) {
+    @PostMapping("/saveBranch")
+    public String saveBranch(@ModelAttribute("employee") Branch branch) {
         // save employee to database
         branchServiceImpl.createBranch(branch);
         return "redirect:/";
     }
 
-    @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") Integer id, Model model) {
+    @GetMapping("/showBranchForUpdate/{id}")
+    public String showBranchForUpdate(@PathVariable(value = "id") Integer id, Model model) {
 
         // get employee from the service
         Branch employee = branchServiceImpl.getBranchById(id);
 
         // set employee as a model attribute to pre-populate the form
         model.addAttribute("employee", employee);
-        return "update_employee";
+        return "update_Branch";
     }
 
-    @GetMapping("/deleteEmployee/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") Integer id) {
-
+    @GetMapping("/deleteBranch/{id}")
+    public String deleteBranch(@PathVariable(value = "id") Integer id) {
         // call delete employee method
         this.branchServiceImpl.deleteBranch(id);
-        return "redirect:/";
+        return "redirect:/sucursal";
     }
 
-
+    @PostMapping("/update")
+    public String updateBranchOffice(@Valid @ModelAttribute("editedBranchOffice") BranchDto newBranchOfficeDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "editBranchOffice";
+        } else {
+            branchServiceImpl.updateBranch(newBranchOfficeDTO.getPk_BranchID(), newBranchOfficeDTO);
+            return "redirect:/sucursal/getOne/" + newBranchOfficeDTO.getPk_BranchID();
+        }
+    }
 
 }
 

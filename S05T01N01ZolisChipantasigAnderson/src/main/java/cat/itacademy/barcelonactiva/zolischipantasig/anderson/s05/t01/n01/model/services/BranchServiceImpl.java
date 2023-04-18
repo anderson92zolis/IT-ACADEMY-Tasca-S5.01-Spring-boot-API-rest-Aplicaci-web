@@ -1,6 +1,7 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services;
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
+import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.BranchDto;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.exceptions.ResourceNotFoundException;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.repository.BranchRepository;
@@ -31,11 +32,11 @@ public class BranchServiceImpl implements BranchServicesInterface{
     }
 
     @Override
-    public Branch updateBranch(Integer id, Branch branchRequest) {
+    public Branch updateBranch(Integer id, BranchDto branchDtoRequest) {
         Branch branckFromDB = branchRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Branch", "id", id));
 
-        branckFromDB.setBranchName(branchRequest.getBranchName());
-        branckFromDB.setBranchCountry(branchRequest.getBranchCountry());
+        branckFromDB.setBranchName(branchDtoRequest.getBranchName());
+        branckFromDB.setBranchCountry(branchDtoRequest.getBranchCountry());
 
         return branchRepository.save(branckFromDB);
     }
