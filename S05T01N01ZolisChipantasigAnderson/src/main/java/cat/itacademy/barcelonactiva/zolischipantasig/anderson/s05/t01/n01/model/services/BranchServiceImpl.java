@@ -61,6 +61,17 @@ public class BranchServiceImpl implements BranchServicesInterface{
     }
 
     @Override
+    public BranchDto getBranchDtoById(Integer id) {
+        Optional<?> result = branchRepository.findById(id);
+        if(result.isPresent()) {
+            return (BranchDto) result.get();
+        }else {
+            throw new ResourceNotFoundException("Post", "id", id);
+        }
+    }
+
+
+    @Override
     public List<Branch> getAllBranches() {
         return branchRepository.findAll();
     }

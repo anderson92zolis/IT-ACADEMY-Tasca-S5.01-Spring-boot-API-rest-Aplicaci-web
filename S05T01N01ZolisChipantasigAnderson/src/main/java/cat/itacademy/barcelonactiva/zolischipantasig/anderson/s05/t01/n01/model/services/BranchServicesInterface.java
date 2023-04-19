@@ -15,4 +15,6 @@ public interface BranchServicesInterface {
     void deleteBranch(Integer id);
 
     Branch getBranchById(Integer id);
+
+    BranchDto getBranchDtoById(Integer id);
 }

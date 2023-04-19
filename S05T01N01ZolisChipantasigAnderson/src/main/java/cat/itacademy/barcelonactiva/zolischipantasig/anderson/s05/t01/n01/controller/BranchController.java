@@ -3,11 +3,9 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.contr
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.BranchDto;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services.BranchServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -112,28 +110,8 @@ public class BranchController {
         return "new_employee";
     }
 
-    @GetMapping("/showBranchForUpdate/{id}")
-    public String showBranchForUpdate(@PathVariable(value = "id") Integer id, Model model) {
-
-        // get employee from the service
-        Branch employee = branchServiceImpl.getBranchById(id);
-
-        // set employee as a model attribute to pre-populate the form
-        model.addAttribute("employee", employee);
-        return "update_Branch";
-    }
 
 
-
-    @PostMapping("/update")
-    public String updateBranchOffice(@Valid @ModelAttribute("editedBranchOffice") BranchDto newBranchOfficeDTO, BindingResult result) {
-        if (result.hasErrors()) {
-            return "editBranchOffice";
-        } else {
-            branchServiceImpl.updateBranch(newBranchOfficeDTO.getPk_BranchID(), newBranchOfficeDTO);
-            return "redirect:/sucursal/getOne/" + newBranchOfficeDTO.getPk_BranchID();
-        }
-    }
 
 
     // video   and github https://github.com/RameshMF/student-management-system-springboot/blob/main/src/main/java/net/javaguides/sms/controller/StudentController.java
@@ -167,6 +145,38 @@ public class BranchController {
         this.branchServiceImpl.deleteBranch(id);
         return "redirect:/sucursal";
     }
+
+    @GetMapping("/branch/update/{id}")
+    public String showBranchForUpdate(@PathVariable(value = "id") Integer id, Model model) {
+
+        // get employee from the service
+        Branch branch = branchServiceImpl.getBranchById(id);
+
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("branch", branch);
+        return "updateBranch";
+    }
+
+    @PostMapping("/branchUpdate/{id}")
+    public String branchUpdate(@PathVariable Integer id,
+                                @ModelAttribute("branch") Branch branch,
+                                Model model) {
+
+        // get Branch from database by id
+        BranchDto existingBranch = branchServiceImpl.getBranchDtoById(id);
+        existingBranch.setPk_BranchID(id);
+        existingBranch.setBranchName(branch.getBranchName());
+        existingBranch.setBranchCountry(branch.getBranchCountry());
+
+        //existingBranch.setEmail(studbranchent.getEmail());
+
+        // save updated Branch object
+        branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
+        return "redirect:/branches";
+    }
+
+
+
 
 
 }
