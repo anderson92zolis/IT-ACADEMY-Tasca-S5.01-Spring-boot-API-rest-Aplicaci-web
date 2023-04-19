@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sucursal")
+@RequestMapping()
 public class BranchController {
 
     /*
@@ -102,26 +102,14 @@ public class BranchController {
 
     // endpoints for thymeleaf
 
-    @GetMapping(value= {"/listEmployees",""})
-    public String viewBranchOffices(Model model) {
-        List<Branch> listBranches= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
-        model.addAttribute("listEmployees", listBranches);
-        return "listEmployees";
-    }
 
-    @GetMapping("/showNewEmployeeForm")
-    public String showNewEmployeeForm(Model model) {
+
+    @GetMapping("/showNewBranchForm")
+    public String showNewBranchForm(Model model) {
         // create model attribute to bind form data
         Branch branch = new Branch();
-        model.addAttribute("employee", branch);
+        model.addAttribute("branch", branch);
         return "new_employee";
-    }
-
-    @PostMapping("/saveBranch")
-    public String saveBranch(@ModelAttribute("employee") Branch branch) {
-        // save employee to database
-        branchServiceImpl.createBranch(branch);
-        return "redirect:/";
     }
 
     @GetMapping("/showBranchForUpdate/{id}")
@@ -135,12 +123,7 @@ public class BranchController {
         return "update_Branch";
     }
 
-    @GetMapping("/deleteBranch/{id}")
-    public String deleteBranch(@PathVariable(value = "id") Integer id) {
-        // call delete employee method
-        this.branchServiceImpl.deleteBranch(id);
-        return "redirect:/sucursal";
-    }
+
 
     @PostMapping("/update")
     public String updateBranchOffice(@Valid @ModelAttribute("editedBranchOffice") BranchDto newBranchOfficeDTO, BindingResult result) {
@@ -151,6 +134,40 @@ public class BranchController {
             return "redirect:/sucursal/getOne/" + newBranchOfficeDTO.getPk_BranchID();
         }
     }
+
+
+    // video   and github https://github.com/RameshMF/student-management-system-springboot/blob/main/src/main/java/net/javaguides/sms/controller/StudentController.java
+
+
+    @GetMapping(value= {"/branches",""})
+    public String viewBranchOffices(Model model) {
+        List<Branch> listBranches= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
+        model.addAttribute("branches", listBranches);
+        return "branches";
+    }
+
+    @GetMapping("/newBranch")
+    public String createBranchForm(Model model) {
+
+        // create branch object to hold branch form data
+        Branch branch = new Branch();
+        model.addAttribute("branch", branch);
+        return "newBranch";
+    }
+
+    @PostMapping("/saveBranch")
+    public String saveBranch(@ModelAttribute("branch") Branch branch) {
+        branchServiceImpl.createBranch(branch);
+        return "redirect:/branches";
+    }
+
+    @GetMapping("/deleteBranch/{id}")
+    public String deleteBranch(@PathVariable(value = "id") Integer id) {
+        // call delete employee method
+        this.branchServiceImpl.deleteBranch(id);
+        return "redirect:/sucursal";
+    }
+
 
 }
 
