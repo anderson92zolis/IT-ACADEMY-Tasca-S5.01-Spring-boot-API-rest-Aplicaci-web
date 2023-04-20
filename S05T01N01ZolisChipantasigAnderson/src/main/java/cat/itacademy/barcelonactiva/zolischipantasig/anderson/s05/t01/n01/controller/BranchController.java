@@ -54,7 +54,7 @@ public class BranchController {
 
 
     @GetMapping("/update/{id}")
-    public String showBranchForUpdate(@PathVariable(value = "id") int id, Model model) {
+    public String BranchForUpdate(@PathVariable int id, Model model) {
 
         // get employee from the service
         BranchDto editedBranchDto = branchServiceImpl.getBranchDtoById(id);
@@ -64,14 +64,12 @@ public class BranchController {
         return "updateBranch";
     }
 
-    @PostMapping("/branchUpdate")
-    public String branchUpdate(@PathVariable int id,
-                               @ModelAttribute("editedBranchDto") BranchDto branchDto,
-                               Model model) {
+    @PostMapping("/branchUpdate/{id}")
+    public String updateBranch(@PathVariable("id") int id, @ModelAttribute("editedBranchDto") BranchDto branchDto, Model model) {
 
         // get Branch from database by id
         BranchDto existingBranch = branchServiceImpl.getBranchDtoById(id);
-        existingBranch.setPk_BranchID(id);
+
         existingBranch.setBranchName(branchDto.getBranchName());
         existingBranch.setBranchCountry(branchDto.getBranchCountry());
 
@@ -79,7 +77,7 @@ public class BranchController {
 
         // save updated Branch object
         branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
-        return "redirect:/sucursal/getAll";
+        return "redirect:/sucursal";
     }
 
     @GetMapping("/delete/{id}")
