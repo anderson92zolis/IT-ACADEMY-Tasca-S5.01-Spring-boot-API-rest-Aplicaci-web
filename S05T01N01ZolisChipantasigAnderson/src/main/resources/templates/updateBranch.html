@@ -16,7 +16,7 @@
   <hr>
   <h2>Update Employee</h2>
 
-  <form th:action="@{/branchUpdate/{id} (id=${branch.pk_BranchID})}" th:object = "${branch}" method="POST">
+  <form th:action="@{/sucursal/branchUpdate}" th:object = "${editedBranchDto}" method="POST">
 
     <!-- Add hidden form field to handle update -->
     <input type="hidden" th:field="*{pk_BranchID}" />

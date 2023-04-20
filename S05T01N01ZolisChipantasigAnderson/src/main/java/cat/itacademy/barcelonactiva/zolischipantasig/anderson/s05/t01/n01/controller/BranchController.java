@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,6 +49,44 @@ public class BranchController {
         List<BranchDto> listBranchesDto= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
         model.addAttribute("branchesDto", listBranchesDto);
         return "indexpage";
+
+    }
+
+
+    @GetMapping("/update/{id}")
+    public String showBranchForUpdate(@PathVariable(value = "id") int id, Model model) {
+
+        // get employee from the service
+        BranchDto editedBranchDto = branchServiceImpl.getBranchDtoById(id);
+
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("editedBranchDto", editedBranchDto);
+        return "updateBranch";
+    }
+
+    @PostMapping("/branchUpdate")
+    public String branchUpdate(@PathVariable int id,
+                               @ModelAttribute("editedBranchDto") BranchDto branchDto,
+                               Model model) {
+
+        // get Branch from database by id
+        BranchDto existingBranch = branchServiceImpl.getBranchDtoById(id);
+        existingBranch.setPk_BranchID(id);
+        existingBranch.setBranchName(branchDto.getBranchName());
+        existingBranch.setBranchCountry(branchDto.getBranchCountry());
+
+        //existingBranch.setEmail(studbranchent.getEmail());
+
+        // save updated Branch object
+        branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
+        return "redirect:/sucursal/getAll";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBranch(@PathVariable(value = "id") Integer id) {
+        // call delete employee method
+        this.branchServiceImpl.deleteBranch(id);
+        return "redirect:/sucursal";
     }
 
     /*
@@ -128,41 +163,9 @@ public class BranchController {
 
 
 
-    @GetMapping("/deleteBranch/{id}")
-    public String deleteBranch(@PathVariable(value = "id") Integer id) {
-        // call delete employee method
-        this.branchServiceImpl.deleteBranch(id);
-        return "redirect:/sucursal";
-    }
 
-    @GetMapping("/branch/update/{id}")
-    public String showBranchForUpdate(@PathVariable(value = "id") Integer id, Model model) {
 
-        // get employee from the service
-        Branch branch = branchServiceImpl.getBranchById(id);
 
-        // set employee as a model attribute to pre-populate the form
-        model.addAttribute("branch", branch);
-        return "updateBranch";
-    }
-
-    @PostMapping("/branchUpdate/{id}")
-    public String branchUpdate(@PathVariable Integer id,
-                                @ModelAttribute("branch") Branch branch,
-                                Model model) {
-
-        // get Branch from database by id
-        BranchDto existingBranch = branchServiceImpl.getBranchDtoById(id);
-        existingBranch.setPk_BranchID(id);
-        existingBranch.setBranchName(branch.getBranchName());
-        existingBranch.setBranchCountry(branch.getBranchCountry());
-
-        //existingBranch.setEmail(studbranchent.getEmail());
-
-        // save updated Branch object
-        branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
-        return "redirect:/branches";
-    }
 
 
     */

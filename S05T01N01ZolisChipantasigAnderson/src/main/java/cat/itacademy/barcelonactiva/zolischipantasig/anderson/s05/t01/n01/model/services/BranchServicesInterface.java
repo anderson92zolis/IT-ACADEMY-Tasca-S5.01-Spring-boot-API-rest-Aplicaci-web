@@ -1,6 +1,5 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services;
 
-import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.BranchDto;
 
 import java.util.List;
@@ -12,12 +11,10 @@ public interface BranchServicesInterface {
     List<BranchDto> getAllBranches();
 
 
+    BranchDto getBranchDtoById(int id);
 
-    Branch updateBranch(Integer id, BranchDto branchDto);
+    void updateBranch(int id, BranchDto branchDto);
 
-    void deleteBranch(Integer id);
+    void deleteBranch(int id);
 
-    Branch getBranchById(Integer id);
-
-    BranchDto getBranchDtoById(Integer id);
 }
