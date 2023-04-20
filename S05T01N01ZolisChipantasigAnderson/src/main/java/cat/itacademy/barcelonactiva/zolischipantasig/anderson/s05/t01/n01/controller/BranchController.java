@@ -73,8 +73,6 @@ public class BranchController {
         existingBranch.setBranchName(branchDto.getBranchName());
         existingBranch.setBranchCountry(branchDto.getBranchCountry());
 
-        //existingBranch.setEmail(studbranchent.getEmail());
-
         // save updated Branch object
         branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
         return "redirect:/sucursal";
@@ -87,9 +85,22 @@ public class BranchController {
         return "redirect:/sucursal";
     }
 
+    @GetMapping("/getOne")
+    public String viewOneBranch(@RequestParam("id") int id,Model model) {
+        BranchDto oneBranchDto= branchServiceImpl.getBranchDtoById(id); // we can put directly to the addAttribute
+
+        if (oneBranchDto != null) {
+            model.addAttribute("oneBranch", oneBranchDto);
+            return "oneBranchPage";
+        } else {
+            return "branchNotFound";
+        }
+    }
+
+
     /*
 
-
+    using modelMapper in the controller
 
     // update an existing branch
     @PutMapping("/update/{id}")
@@ -140,38 +151,6 @@ public class BranchController {
                 .map(post -> modelMapper.map(post, BranchDto.class))
                 .collect(Collectors.toList());
     }
-
-    // to the web
-
     */
-
-
-    // video   and github https://github.com/RameshMF/student-management-system-springboot/blob/main/src/main/java/net/javaguides/sms/controller/StudentController.java
-
-
-
-    /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    */
-
-
-
-
-
-
 }
 
