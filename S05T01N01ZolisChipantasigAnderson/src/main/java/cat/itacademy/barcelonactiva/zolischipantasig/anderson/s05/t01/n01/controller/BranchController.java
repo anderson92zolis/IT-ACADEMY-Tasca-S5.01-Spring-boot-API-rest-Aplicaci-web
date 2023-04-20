@@ -1,48 +1,62 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.controller;
 
-import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.domain.Branch;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.BranchDto;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.services.BranchServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/sucursal")
 public class BranchController {
-
-    /*
-    @Autowired
-    private ModelMapper modelMapper;
-     */
 
     @Autowired
     private BranchServiceImpl branchServiceImpl;
+
 
     public BranchController (BranchServiceImpl branchServiceImpl){
         this.branchServiceImpl=branchServiceImpl;
     }
 
+
+    @GetMapping("/add")
+    public String createBranch(Model model) {
+
+        // create branch object to hold branch form data
+
+        BranchDto neWBranchDto = new BranchDto();
+
+        model.addAttribute("newbranchDto", neWBranchDto);
+        return "newbranchdtopage";
+    }
+
+    @PostMapping("/saveBranch")
+    public String saveBranch(@Valid @ModelAttribute("newbranchDto") BranchDto branchDto, BindingResult result) {
+        if(result.hasErrors()) {
+            return "newbranchdtopage";
+    } else {
+            branchServiceImpl.createBranch(branchDto);
+            return "redirect:/sucursal/getAll";}
+    }
+
+    @GetMapping(value= {"/getAll",""})
+    public String viewBranchOffices(Model model) {
+        List<BranchDto> listBranchesDto= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
+        model.addAttribute("branchesDto", listBranchesDto);
+        return "indexpage";
+    }
+
     /*
 
 
-    //add a new branch
-    @PostMapping("/add")
-    public ResponseEntity<BranchDto> createBranch(@RequestBody BranchDto branchDto) {
-
-        // convert DTO to entity
-        Branch branchRequest = modelMapper.map(branchDto, Branch.class);
-
-        Branch branch = branchServiceImpl.createBranch(branchRequest);
-
-        // convert entity to DTO
-        BranchDto branchResponse = modelMapper.map(branch, BranchDto.class);
-
-        return new ResponseEntity<BranchDto>(branchResponse, HttpStatus.CREATED);
-    }
 
     // update an existing branch
     @PutMapping("/update/{id}")
@@ -98,46 +112,21 @@ public class BranchController {
 
     */
 
-    // endpoints for thymeleaf
-
-
-
-    @GetMapping("/showNewBranchForm")
-    public String showNewBranchForm(Model model) {
-        // create model attribute to bind form data
-        Branch branch = new Branch();
-        model.addAttribute("branch", branch);
-        return "new_employee";
-    }
-
-
-
-
 
     // video   and github https://github.com/RameshMF/student-management-system-springboot/blob/main/src/main/java/net/javaguides/sms/controller/StudentController.java
 
 
-    @GetMapping(value= {"/branches",""})
-    public String viewBranchOffices(Model model) {
-        List<Branch> listBranches= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
-        model.addAttribute("branches", listBranches);
-        return "branches";
-    }
 
-    @GetMapping("/newBranch")
-    public String createBranchForm(Model model) {
+    /*
 
-        // create branch object to hold branch form data
-        Branch branch = new Branch();
-        model.addAttribute("branch", branch);
-        return "newBranch";
-    }
 
-    @PostMapping("/saveBranch")
-    public String saveBranch(@ModelAttribute("branch") Branch branch) {
-        branchServiceImpl.createBranch(branch);
-        return "redirect:/branches";
-    }
+
+
+
+
+
+
+
 
     @GetMapping("/deleteBranch/{id}")
     public String deleteBranch(@PathVariable(value = "id") Integer id) {
@@ -174,6 +163,10 @@ public class BranchController {
         branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
         return "redirect:/branches";
     }
+
+
+    */
+
 
 
 

@@ -13,7 +13,7 @@
   <hr>
   <h2>Save Branch</h2>
 
-  <form action="#" th:action="@{saveBranch}" th:object="${branch}" method="POST">
+  <form action="#" th:action="@{/sucursal/saveBranch}" th:object="${newbranchDto}" method="POST">
 
     <input type="text" th:field="*{branchName}" placeholder="Branch Name" class="form-control mb-4 col-4">
 
@@ -27,7 +27,7 @@
 
   <hr>
 
-  <a th:href="@{/}"> Back to Employee List</a>
+  <a th:href="@{/sucursal/getAll}"> Back to Employee List</a>
 </div>
 </body>
 

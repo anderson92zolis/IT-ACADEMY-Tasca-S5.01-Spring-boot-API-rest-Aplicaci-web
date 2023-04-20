@@ -5,6 +5,7 @@ import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.exceptions.ResourceNotFoundException;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.repository.BranchRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BranchServiceImpl implements BranchServicesInterface{
 
     @Autowired
     private BranchRepository branchRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     public BranchServiceImpl (BranchRepository branchRepository){
         super();
@@ -26,10 +31,28 @@ public class BranchServiceImpl implements BranchServicesInterface{
 
 
 
-    @Override
-    public Branch createBranch(Branch branch) {
-        return branchRepository.save(branch);
+
+
+    // using ModelMapper to convert
+    private BranchDto convertoToBranchDto(Branch branch){
+        return modelMapper.map(branch, BranchDto.class);
     }
+    private Branch convertToBranchEntity(BranchDto branchDto){
+        return modelMapper.map(branchDto, Branch.class);
+    }
+
+    @Override
+    public void createBranch(BranchDto branchDto) {
+        branchRepository.save(convertToBranchEntity(branchDto));
+    }
+
+
+    @Override
+    public List<BranchDto> getAllBranches() {
+        List<Branch> branchRepositoryFromDB= branchRepository.findAll();
+        return branchRepositoryFromDB.stream().map(this::convertoToBranchDto).collect(Collectors.toList());
+    }
+
 
     @Override
     public Branch updateBranch(Integer id, BranchDto branchDtoRequest) {
@@ -71,10 +94,7 @@ public class BranchServiceImpl implements BranchServicesInterface{
     }
 
 
-    @Override
-    public List<Branch> getAllBranches() {
-        return branchRepository.findAll();
-    }
+
 
     public ResponseEntity<Message> validateBranchId(int id) {
         if (branchRepository.existsById(id)) {
