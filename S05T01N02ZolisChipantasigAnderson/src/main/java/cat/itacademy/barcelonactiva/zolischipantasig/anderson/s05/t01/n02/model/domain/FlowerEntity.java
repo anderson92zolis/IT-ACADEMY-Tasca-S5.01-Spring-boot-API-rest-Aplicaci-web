@@ -12,21 +12,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "flowers")
-public class FlorEntity {
+public class FlowerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pk_FlorID;
 
     @Column(name= "nameFlower")
-    private String nomFlor;
+    private String nameFlower;
 
     @Column(name= "countryFlower")
-    private String paisFlor;
+    private String countryFlower;
 
-    public FlorEntity(String nomFlor, String paisFlor){
-        this.nomFlor=nomFlor;
-        this.paisFlor=paisFlor;
+    public FlowerEntity(String nameFlower, String countryFlower){
+        super();
+        this.nameFlower=nameFlower;
+        this.countryFlower=countryFlower;
     }
 
 }
