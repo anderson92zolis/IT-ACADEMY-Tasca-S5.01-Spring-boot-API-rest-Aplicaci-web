@@ -55,7 +55,7 @@ public class BranchServiceImpl implements BranchServicesInterface {
         if (result.isPresent()) {
             return convertoToBranchDto((Branch) result.get());
         } else {
-            throw new ResourceNotFoundException("Branch not found", "id", id);
+            throw new ResourceNotFoundException("BRANCH NOT FOUND", "ID ", id);
         }
     }
 

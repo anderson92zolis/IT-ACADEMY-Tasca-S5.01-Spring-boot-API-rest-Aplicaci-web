@@ -8,7 +8,7 @@ import java.util.List;
 public class BranchDto implements Serializable {
 
 
-    // Llave primaria de la tabla
+    // primary key
     private Integer pk_BranchID;
 
     private String branchName;

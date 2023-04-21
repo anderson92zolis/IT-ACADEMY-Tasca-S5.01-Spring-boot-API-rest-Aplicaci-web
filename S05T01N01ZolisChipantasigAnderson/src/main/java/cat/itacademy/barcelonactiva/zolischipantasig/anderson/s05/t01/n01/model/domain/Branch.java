@@ -21,7 +21,7 @@ public class Branch implements Serializable {
     @Column(name = "branchCountry")
     private String branchCountry;
 
-    // cosntructor
+    // constructor
     public Branch() {
     }
 
