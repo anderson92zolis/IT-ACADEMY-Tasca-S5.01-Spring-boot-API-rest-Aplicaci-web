@@ -30,7 +30,6 @@ public class BranchController {
         // create branch object to hold branch form data
 
         BranchDto neWBranchDto = new BranchDto();
-
         model.addAttribute("newbranchDto", neWBranchDto);
         return "newbranchdtopage";
     }
@@ -44,12 +43,11 @@ public class BranchController {
             return "redirect:/sucursal/getAll";}
     }
 
-    @GetMapping(value= {"/getAll",""})
+    @GetMapping(value= {"/getAll","/",""})
     public String viewBranchOffices(Model model) {
         List<BranchDto> listBranchesDto= branchServiceImpl.getAllBranches(); // we can put directly to the addAttribute
         model.addAttribute("branchesDto", listBranchesDto);
         return "indexpage";
-
     }
 
 
@@ -72,6 +70,7 @@ public class BranchController {
 
         existingBranch.setBranchName(branchDto.getBranchName());
         existingBranch.setBranchCountry(branchDto.getBranchCountry());
+        
 
         // save updated Branch object
         branchServiceImpl.updateBranch(existingBranch.getPk_BranchID(),existingBranch);
@@ -87,6 +86,7 @@ public class BranchController {
 
     @GetMapping("/getOne")
     public String viewOneBranch(@RequestParam("id") int id,Model model) {
+
         BranchDto oneBranchDto= branchServiceImpl.getBranchDtoById(id); // we can put directly to the addAttribute
 
         if (oneBranchDto != null) {

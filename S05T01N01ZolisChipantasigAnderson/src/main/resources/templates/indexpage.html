@@ -36,6 +36,7 @@
             <td th:text = "${branchDto.pk_BranchID}"></td>
             <td th:text="${branchDto.branchName}"></td>
             <td th:text="${branchDto.branchCountry}"></td>
+            <td th:text="${branchDto.setBranchType()}"></td>
             <td> <a th:href="@{/sucursal/update/{id}(id=${branchDto.pk_BranchID})}" class="btn btn-primary">Update Branch</a>
                  <a th:href="@{/sucursal/delete/{id}(id=${branchDto.pk_BranchID})}" class="btn btn-danger">Delete Branch</a>
             </td>

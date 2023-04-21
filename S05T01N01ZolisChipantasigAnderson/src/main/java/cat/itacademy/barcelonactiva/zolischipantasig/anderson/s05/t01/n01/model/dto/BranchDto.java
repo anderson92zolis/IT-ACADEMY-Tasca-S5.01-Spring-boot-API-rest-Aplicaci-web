@@ -2,7 +2,7 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Objects;
+import java.util.List;
 
 
 public class BranchDto implements Serializable {
@@ -17,6 +17,12 @@ public class BranchDto implements Serializable {
 
     private String branchType;
 
+    // Define an array of EU member countries
+    private final List<String> COUNTRIES_EU =  Arrays.asList("Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark",
+            "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy",
+            "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal",
+            "Romania", "Slovakia", "Slovenia", "Spain", "Sweden");
+
     // constructor
     public BranchDto() {
     }
@@ -24,6 +30,8 @@ public class BranchDto implements Serializable {
     public BranchDto(String branchName, String branchCountry) {
         this.branchName = branchName;
         this.branchCountry = branchCountry;
+        this.branchType= setBranchType();
+
     }
 
     // getters
@@ -57,51 +65,30 @@ public class BranchDto implements Serializable {
     public void setBranchCountry(String branchCountry) {
         this.branchCountry = branchCountry;
     }
-    public void setBranchType(String branchType) {
-        this.branchType = branchType;
-    }
 
     // METHOD TO KNOW IF COUNTRY IN PART OF EU
 
-    public void isCountryInEU(String country) {
-
-        // Define an array of EU member countries
-
-        String[] euCountries = {"Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark",
-                "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy",
-                "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal",
-                "Romania", "Slovakia", "Slovenia", "Spain", "Sweden"};
-
-        // Check if the given country is in the array of EU member countries
-        String outsideOfEu= "Outside of Eu";
-        boolean isInsideEU = Arrays.stream(euCountries).
-                anyMatch(c -> c.equalsIgnoreCase(country));
-        if (isInsideEU = true){
-            setBranchType("EU");
+    public String setBranchType(){
+        if (isInEU()){
+            this.branchType= "EU";
         } else {
-            setBranchType(outsideOfEu);
-        }
+            this.branchType= "outside EU";
+        };
+        return this.branchType;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BranchDto branchDto)) return false;
-        return Objects.equals(pk_BranchID, branchDto.pk_BranchID) && Objects.equals(branchName, branchDto.branchName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pk_BranchID, branchName);
+    public Boolean isInEU() {
+        // Check if the given country is in the array of EU member countries
+        return (COUNTRIES_EU.contains(branchCountry));
     }
 
     @Override
     public String toString() {
-        return "Branch{" +
+        return "BranchDto{" +
                 "pk_BranchID=" + pk_BranchID +
                 ", branchName='" + branchName + '\'' +
                 ", branchCountry='" + branchCountry + '\'' +
+                ", branchType='" + branchType + '\'' +
                 '}';
     }
 
