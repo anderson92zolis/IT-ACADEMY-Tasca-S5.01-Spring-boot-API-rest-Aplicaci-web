@@ -16,7 +16,7 @@ public class FlowerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pk_FlorID;
+    private int pk_FlorID;
 
     @Column(name= "nameFlower")
     private String nameFlower;

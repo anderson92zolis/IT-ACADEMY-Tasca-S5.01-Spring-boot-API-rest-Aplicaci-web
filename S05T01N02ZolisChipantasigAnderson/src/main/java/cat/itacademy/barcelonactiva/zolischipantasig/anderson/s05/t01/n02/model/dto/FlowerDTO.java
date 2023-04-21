@@ -14,11 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class FlowerDTO {
 
-    private Integer pk_FlorID;
-
+    private int pk_FlorID;
 
     private String nameFlower;
-
 
     private String countryFlower;
 
