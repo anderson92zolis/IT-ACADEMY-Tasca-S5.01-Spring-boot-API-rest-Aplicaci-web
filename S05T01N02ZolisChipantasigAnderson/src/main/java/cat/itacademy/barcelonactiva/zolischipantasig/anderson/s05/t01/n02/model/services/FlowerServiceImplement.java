@@ -2,9 +2,13 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.domain.FlowerEntity;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto.FlowerDTO;
+import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.exceptions.ResourceNotFoundException;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.repository.IFlowerRepository;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
@@ -72,4 +76,34 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
         FlowerDTO flowerDTO = getFlowerDtoById(id);
         iFlowerRepository.delete(convertToFlowerEntity(flowerDTO));
     }
+
+    /*
+     * This method validates the existence of a fruit by ID in the REST controller's methods.
+     */
+
+    public ResponseEntity<Message> validateFruitaEntityId(int id) {
+        if (iFlowerRepository.existsById(id)) {
+            return new ResponseEntity<>(new Message("Fruit ID validated successfully."), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new Message("ERROR. The ID entered does not exist."), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /*
+     * Method to validate the entered data (name and quantityKg) of the fruit in the RestController methods.
+     */
+
+    public ResponseEntity<Message> validateFruitaDto(FlowerDTO fruitaDto) {
+
+        if (StringUtils.isBlank(fruitaDto.getNameFlower())) {
+            return new ResponseEntity<>(new Message("ERROR. The Name is required."), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(fruitaDto.getCountryFlower())) {
+            return new ResponseEntity<>(new Message("ERROR. The Country is required."), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(new Message("Fruit validated successfully."), HttpStatus.OK);
+    }
+
+
+
 }

@@ -1,5 +1,6 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,16 +28,38 @@ public class FlowerDTO {
             "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal",
             "Romania", "Slovakia", "Slovenia", "Spain", "Sweden");
 
+
+
     public FlowerDTO(String nameFlower, String countryFlower){
         this.nameFlower=nameFlower;
         this.countryFlower=countryFlower;
     }
+
+
+
+
 
     public void setFlowerType(String countryFlower) {
         this.countryFlower = countryFlower;
         this.flowerType = COUNTRIES_EU.stream().anyMatch(c -> c.equalsIgnoreCase(countryFlower)) ? "EU" : "NOT EU";
     }
 
+    // getter & setter because a problem with lombok
+    public String getNameFlower() {
+        return nameFlower;
+    }
+
+    public String getCountryFlower() {
+        return countryFlower;
+    }
+
+    public void setNameFlower(String nameFlower) {
+        this.nameFlower = nameFlower;
+    }
+
+    public void setCountryFlower(String countryFlower) {
+        this.countryFlower = countryFlower;
+    }
 }
 
 
