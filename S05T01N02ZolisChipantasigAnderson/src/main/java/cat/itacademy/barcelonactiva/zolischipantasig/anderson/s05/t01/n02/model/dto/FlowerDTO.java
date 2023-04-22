@@ -23,25 +23,15 @@ public class FlowerDTO {
 
     private String flowerType;
 
-    private final List<String> COUNTRIES_EU =  Arrays.asList("Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark",
+    @JsonIgnore
+    private List<String> COUNTRIES_EU =  Arrays.asList("Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark",
             "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy",
             "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal",
             "Romania", "Slovakia", "Slovenia", "Spain", "Sweden");
 
-
-
     public FlowerDTO(String nameFlower, String countryFlower){
         this.nameFlower=nameFlower;
         this.countryFlower=countryFlower;
-    }
-
-
-
-
-
-    public void setFlowerType(String countryFlower) {
-        this.countryFlower = countryFlower;
-        this.flowerType = COUNTRIES_EU.stream().anyMatch(c -> c.equalsIgnoreCase(countryFlower)) ? "EU" : "NOT EU";
     }
 
     // getter & setter because a problem with lombok
@@ -53,13 +43,17 @@ public class FlowerDTO {
         return countryFlower;
     }
 
+
+
     public void setNameFlower(String nameFlower) {
         this.nameFlower = nameFlower;
     }
 
     public void setCountryFlower(String countryFlower) {
         this.countryFlower = countryFlower;
+        this.flowerType = COUNTRIES_EU.stream().anyMatch(c -> c.equalsIgnoreCase(countryFlower)) ? "EU" : "NOT EU";
     }
+
 }
 
 

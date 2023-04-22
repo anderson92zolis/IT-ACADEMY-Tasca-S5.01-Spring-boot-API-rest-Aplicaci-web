@@ -93,15 +93,15 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
      * Method to validate the entered data (name and quantityKg) of the fruit in the RestController methods.
      */
 
-    public ResponseEntity<Message> validateFruitaDto(FlowerDTO fruitaDto) {
+    public ResponseEntity<Message> validateFruitaDto(FlowerDTO flowerDTO) {
 
-        if (StringUtils.isBlank(fruitaDto.getNameFlower())) {
+        if (StringUtils.isBlank(flowerDTO.getNameFlower())) {
             return new ResponseEntity<>(new Message("ERROR. The Name is required."), HttpStatus.BAD_REQUEST);
         }
-        if (StringUtils.isBlank(fruitaDto.getCountryFlower())) {
+        if (StringUtils.isBlank(flowerDTO.getCountryFlower())) {
             return new ResponseEntity<>(new Message("ERROR. The Country is required."), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new Message("Fruit validated successfully."), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Frower validated successfully."), HttpStatus.OK);
     }
 
 

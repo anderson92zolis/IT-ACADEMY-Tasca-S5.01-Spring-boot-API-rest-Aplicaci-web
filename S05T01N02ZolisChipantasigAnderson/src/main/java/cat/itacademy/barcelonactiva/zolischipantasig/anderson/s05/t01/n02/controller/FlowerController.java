@@ -31,7 +31,7 @@ public class FlowerController {
 
         if (validationResult.getStatusCode() == HttpStatus.OK) {
             flowerServiceImplement.createFlower(flowerDTO);
-            return new ResponseEntity<>(new Message("Successfully created fruit"), HttpStatus.CREATED);
+            return new ResponseEntity<>(new Message("Successfully added flower"), HttpStatus.CREATED);
         } else {
             return validationResult;
         }
