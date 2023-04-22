@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("flowers")
+@RequestMapping("/flowers")
 public class FlowerController {
 
 
@@ -20,6 +20,7 @@ public class FlowerController {
 
     @Autowired
     public FlowerController(FlowerServiceImplement flowerServiceImplement) {
+        super();
         this.flowerServiceImplement = flowerServiceImplement;
     }
 
@@ -56,7 +57,7 @@ public class FlowerController {
     }
 
 
-    //read an Flower
+    //read a Flower
     @GetMapping("/getOne/{id}")
     public ResponseEntity<FlowerDTO> getFlowerById(@PathVariable(name = "id") int id) {
         FlowerDTO flowerDTO = flowerServiceImplement.getFlowerDtoById(id);
@@ -70,9 +71,6 @@ public class FlowerController {
     public List<FlowerDTO> getAllFlower() {
         return flowerServiceImplement.getAllFlowers();
     }
-
-
-
 
 
 }
