@@ -18,14 +18,24 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("io.springfox:springfox-swagger2:3.0.0")
-	implementation("io.springfox:springfox-swagger-ui:3.0.0")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+	runtimeOnly("com.mysql:mysql-connector-j")
+
+
+
 	annotationProcessor("org.projectlombok:lombok")
     implementation("org.projectlombok:lombok:1.18.26")
+
+
 	implementation("org.modelmapper:modelmapper:3.1.1")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.mysql:mysql-connector-j")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
+	implementation("io.springfox:springfox-swagger2:3.0.0")
+	//implementation("io.springfox:springfox-swagger-ui:3.0.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4") //OPEN API AMB SWAGGER PER SPRING MVC
+
 }
 
 tasks.withType<Test> {

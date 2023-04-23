@@ -101,7 +101,7 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
         if (StringUtils.isBlank(flowerDTO.getCountryFlower())) {
             return new ResponseEntity<>(new Message("ERROR. The Country is required."), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new Message("Frower validated successfully."), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Flower validated successfully."), HttpStatus.OK);
     }
 
 

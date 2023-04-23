@@ -1,9 +1,20 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.controller;
 
-import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.domain.FlowerEntity;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto.FlowerDTO;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.services.FlowerServiceImplement;
+import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/flowers")
+@Tag(name = "Flowers Management System", description = "CRUD operations from flowers database")
 public class FlowerController {
 
 
@@ -59,6 +71,7 @@ public class FlowerController {
 
     //read a Flower
     @GetMapping("/getOne/{id}")
+    @ApiOperation(value = "Obtenir un exemple per ID")
     public ResponseEntity<FlowerDTO> getFlowerById(@PathVariable(name = "id") int id) {
         FlowerDTO flowerDTO = flowerServiceImplement.getFlowerDtoById(id);
 
@@ -67,6 +80,7 @@ public class FlowerController {
 
 
     // read all branches
+
     @GetMapping("/getAll")
     public List<FlowerDTO> getAllFlower() {
         return flowerServiceImplement.getAllFlowers();
