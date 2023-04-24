@@ -3,17 +3,9 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.contr
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto.FlowerDTO;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n02.model.services.FlowerServiceImplement;
-import io.swagger.annotations.*;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponses;
-
-
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,7 +72,12 @@ public class FlowerController {
 
 
     // read all branches
-
+    @ApiOperation(value = "Get list of Students in the System ", response = Iterable.class, tags = "getStudents")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode =  "200", description = "SUCEESS|OK"),
+            @ApiResponse(responseCode = "401", description = "NOT AUTHORIZED!"),
+            @ApiResponse(responseCode = "403", description = "FORBIDDEN!!!"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND!!!") })
     @GetMapping("/getAll")
     public List<FlowerDTO> getAllFlower() {
         return flowerServiceImplement.getAllFlowers();

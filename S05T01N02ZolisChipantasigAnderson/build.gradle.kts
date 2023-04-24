@@ -18,6 +18,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("io.swagger.core.v3:swagger-annotations:2.2.8")
+	implementation("io.swagger.core.v3:swagger-annotations:2.2.8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -33,7 +35,8 @@ dependencies {
 
 
 	implementation("io.springfox:springfox-swagger2:3.0.0")
-	//implementation("io.springfox:springfox-swagger-ui:3.0.0")
+	implementation("io.springfox:springfox-swagger-ui:3.0.0")
+	//implementation("io.springfox:springfox-boot-starter:3.0.0")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4") //OPEN API AMB SWAGGER PER SPRING MVC
 
 }
