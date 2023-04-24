@@ -34,25 +34,11 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
         return modelMapper.map(flowerEntity, FlowerDTO.class);
     }
 
+
     private FlowerEntity convertToFlowerEntity(FlowerDTO flowerDTO) {
         return modelMapper.map(flowerDTO, FlowerEntity.class);
     }
 
-    @Override
-    public FlowerDTO getFlowerDtoById(int id) {
-        Optional<?> result = iFlowerRepository.findById(id);
-        if (result.isPresent()) {
-            return convertoToFlowerDto((FlowerEntity) result.get());
-        } else {
-            throw new ResourceNotFoundException("Flower NOT FOUND", "ID ", id);
-        }
-    }
-
-    @Override
-    public List<FlowerDTO> getAllFlowers() {
-        List<FlowerEntity> flowerRepositoryFromDB = iFlowerRepository.findAll();
-        return flowerRepositoryFromDB.stream().map(this::convertoToFlowerDto).collect(Collectors.toList());
-    }
 
     @Override
     public void createFlower(FlowerDTO flowerDTO) {
@@ -62,7 +48,7 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
     @Override
     public void updateFlower(int id, FlowerDTO flowerDTO) {
 
-        FlowerDTO floweDtoFromDB = convertoToFlowerDto(iFlowerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Branch not found", "id", id)));
+        FlowerDTO floweDtoFromDB = convertoToFlowerDto(iFlowerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("FLOWER NOT FOUND", "ID", id)));
 
         floweDtoFromDB.setNameFlower(flowerDTO.getNameFlower());
         floweDtoFromDB.setCountryFlower(flowerDTO.getCountryFlower());
@@ -76,6 +62,30 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
         FlowerDTO flowerDTO = getFlowerDtoById(id);
         iFlowerRepository.delete(convertToFlowerEntity(flowerDTO));
     }
+
+
+
+
+    @Override
+    public FlowerDTO getFlowerDtoById(int id) {
+        Optional<?> result = iFlowerRepository.findById(id);
+        if (result.isPresent()) {
+            return convertoToFlowerDto((FlowerEntity) result.get());
+        } else {
+            throw new ResourceNotFoundException("FLOWER NOT FOUND", "ID ", id);
+        }
+    }
+
+
+
+
+    @Override
+    public List<FlowerDTO> getAllFlowers() {
+        List<FlowerEntity> flowerRepositoryFromDB = iFlowerRepository.findAll();
+        return flowerRepositoryFromDB.stream().map(this::convertoToFlowerDto).collect(Collectors.toList());
+    }
+
+
 
     /*
      * This method validates the existence of a fruit by ID in the REST controller's methods.
@@ -96,14 +106,11 @@ public class FlowerServiceImplement implements FlowerServiceInterface{
     public ResponseEntity<Message> validateFruitaDto(FlowerDTO flowerDTO) {
 
         if (StringUtils.isBlank(flowerDTO.getNameFlower())) {
-            return new ResponseEntity<>(new Message("ERROR. The Name is required."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Message("ERROR. THE NAME IS REQUIRED."), HttpStatus.BAD_REQUEST);
         }
         if (StringUtils.isBlank(flowerDTO.getCountryFlower())) {
-            return new ResponseEntity<>(new Message("ERROR. The Country is required."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Message("ERROR. THE COUNTRY IS REQUIRED."), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new Message("Flower validated successfully."), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("FLOWER VALIDATED SUCCESSFULLY."), HttpStatus.OK);
     }
-
-
-
 }
