@@ -25,16 +25,19 @@ dependencies {
 	implementation("io.projectreactor.netty:reactor-netty:0.8.16.RELEASE")
 
 	//lombok
-	compileOnly ("org.projectlombok:lombok:1.18.8")
-	annotationProcessor("org.projectlombok:lombok:1.18.8")
-	implementation("org.slf4j:slf4j-api:1.7.26")
-	implementation("org.slf4j:slf4j-simple:1.7.26")
+	annotationProcessor("org.projectlombok:lombok")
+	implementation("org.projectlombok:lombok:1.18.26")
 
 	//jackson
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.12.7.1")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.9")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9")
 	implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.9")
+
+	implementation("io.springfox:springfox-swagger2:3.0.0")
+	implementation("io.springfox:springfox-swagger-ui:3.0.0")
+	//implementation("io.springfox:springfox-boot-starter:3.0.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4") //OPEN API AMB SWAGGER PER SPRING MVC
 
 
 }

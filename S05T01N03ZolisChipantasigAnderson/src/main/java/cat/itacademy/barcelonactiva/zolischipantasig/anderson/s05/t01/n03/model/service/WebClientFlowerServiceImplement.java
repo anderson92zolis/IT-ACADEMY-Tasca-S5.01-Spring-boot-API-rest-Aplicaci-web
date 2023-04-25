@@ -23,6 +23,28 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
 
 
     @Override
+    public Mono<FlowerDTO> createFlower(FlowerDTO flowerDTO) {
+        return webClient.post()
+                .uri(CLIENT_FLORS_ADD)
+                .body(Mono.just(flowerDTO), FlowerDTO.class)
+                .retrieve()
+                .bodyToMono(FlowerDTO.class);
+    }
+
+
+    @Override
+    public Mono<FlowerDTO> updateFlower(int id, FlowerDTO flowerDTO) {
+        return webClient.put()
+                .uri(CLIENT_FLORS_UPDATE,id)
+                .body(Mono.just(flowerDTO), FlowerDTO.class)
+                .retrieve()
+                .bodyToMono(FlowerDTO.class);
+    }
+
+
+
+
+    @Override
     public Mono<FlowerDTO> getFlowerDtoById(int id) {
         return webClient.get()
                 .uri(CLIENT_FLORS_GET_ONE, id)
@@ -39,24 +61,6 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
                 .uri(CLIENT_FLORS_ALL)
                 .retrieve()
                 .bodyToFlux(FlowerDTO.class);
-    }
-
-    @Override
-    public Mono<FlowerDTO> createFlower(FlowerDTO flowerDTO) {
-        return webClient.post()
-                .uri(CLIENT_FLORS_ADD)
-                .body(Mono.just(flowerDTO), FlowerDTO.class)
-                .retrieve()
-                .bodyToMono(FlowerDTO.class);
-    }
-
-    @Override
-    public Mono<FlowerDTO> updateFlower(int id, FlowerDTO flowerDTO) {
-        return webClient.put()
-                .uri(CLIENT_FLORS_UPDATE,id)
-                .body(Mono.just(flowerDTO), FlowerDTO.class)
-                .retrieve()
-                .bodyToMono(FlowerDTO.class);
     }
 
     @Override

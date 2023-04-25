@@ -14,10 +14,10 @@ public interface WebClientFlowerServiceInterface {
     Flux<FlowerDTO> getAllFlowers();
 
     // Create a new Flower
-    Mono<FlowerDTO>  createFlower(FlowerDTO flowerDTO);
+    Mono<FlowerDTO> createFlower(FlowerDTO flowerDTO);
 
     // Update an existing Flower
-    Mono<FlowerDTO>  updateFlower(int id, FlowerDTO flowerDTO);
+    Mono<FlowerDTO> updateFlower(int id, FlowerDTO flowerDTO);
 
     // Delete a Flower by ID
     Mono<Void> deleteFlower(int id);
