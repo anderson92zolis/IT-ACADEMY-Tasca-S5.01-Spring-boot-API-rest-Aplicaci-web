@@ -2,11 +2,11 @@ package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model
 
 public class FlowerConstants {
 
-    public static final String CLIENT_FLORS_ALL = "http://localhost:9001/flowers/getAll";
-    public static final String CLIENT_FLORS_GET_ONE = "http://localhost:9001/flowers/getOne/{id}";
+    public static final String CLIENT_FLORS_ALL = "/getAll";
+    public static final String CLIENT_FLORS_GET_ONE = "/getOne/{id}";
     public static final String CLIENT_FLORS_ADD = "/add";
-    public static final String CLIENT_FLORS_UPDATE ="http://localhost:9001/flowersl/update/{id}" ;
-    public static final String CLIENT_FLORS_DELETE ="http://localhost:9001/flowers/delete/{id}" ;
+    public static final String CLIENT_FLORS_UPDATE ="/update/{id}" ;
+    public static final String CLIENT_FLORS_DELETE ="/delete/{id}" ;
 
 
 

@@ -20,7 +20,7 @@ class WebClientConfiguration {
 
         WebClient webClient = WebClient
                 .builder()
-                .baseUrl("http://localhost:9002/flowers/")
+                .baseUrl("http://localhost:9001/flowers")
                 .defaultCookie("cookieKey", "cookieValue")
                 .exchangeStrategies(strategies)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
