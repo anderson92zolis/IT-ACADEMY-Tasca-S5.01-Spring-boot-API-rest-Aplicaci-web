@@ -4,7 +4,7 @@ public class FlowerConstants {
 
     public static final String CLIENT_FLORS_ALL = "http://localhost:9001/flowers/getAll";
     public static final String CLIENT_FLORS_GET_ONE = "http://localhost:9001/flowers/getOne/{id}";
-    public static final String CLIENT_FLORS_ADD = "http://localhost:9001/flowers/add";
+    public static final String CLIENT_FLORS_ADD = "/add";
     public static final String CLIENT_FLORS_UPDATE ="http://localhost:9001/flowersl/update/{id}" ;
     public static final String CLIENT_FLORS_DELETE ="http://localhost:9001/flowers/delete/{id}" ;
 
