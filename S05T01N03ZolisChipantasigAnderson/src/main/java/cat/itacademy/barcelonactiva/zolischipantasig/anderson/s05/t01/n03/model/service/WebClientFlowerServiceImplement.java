@@ -63,7 +63,7 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
     @Override
     public Flux<FlowerDTO> getAllFlowers() {
         return webClient.get()
-                .uri(CLIENT_FLORS_ALL)
+                .uri(uriBuilder -> uriBuilder.path(CLIENT_FLORS_ALL).build())
                 .retrieve()
                 .bodyToFlux(FlowerDTO.class);
     }

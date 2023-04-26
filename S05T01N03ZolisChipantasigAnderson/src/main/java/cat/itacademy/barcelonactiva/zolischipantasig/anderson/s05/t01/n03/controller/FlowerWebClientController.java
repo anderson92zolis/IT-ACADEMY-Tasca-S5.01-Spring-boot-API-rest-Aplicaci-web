@@ -4,6 +4,9 @@ import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.dto.Message;
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.service.WebClientFlowerServiceImplement;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -126,15 +130,15 @@ public class FlowerWebClientController {
     @Operation(summary = "GET ALL",
             description = "Get all flowers from the database")
     @ApiResponses(value = {
-
+            /*@ApiResponse(responseCode = "200", description = "List of flowers retrieved successfully", content = {@Content(mediaType = "application/json",
+            array = @ArraySchema(schema = @Schema(implementation = FlowerDTO.class)))}),*/
             @ApiResponse(responseCode = "200", description = "Show all the Flowers available from database")})
 
     @GetMapping("/clientFlorsAll")
-    public ResponseEntity<?> getAllFlowerWebClient() throws Exception {
+    public ResponseEntity<Flux<FlowerDTO>> getAllFlowerWebClient() throws Exception {
         try {
-            return new ResponseEntity<>(webClientFlowerServiceImplement.getAllFlowers()
-                    .map(flower -> new Message("Get All Flower")),
-                    HttpStatus.CREATED);
+            return new ResponseEntity<Flux<FlowerDTO>>(webClientFlowerServiceImplement.getAllFlowers(),
+                    HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception( "Internal Server Error while getting All Flower", e.getCause());
         }
