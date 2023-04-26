@@ -1,10 +1,12 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n01.model.dto;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Data
 public class BranchDto implements Serializable {
 
 
@@ -14,6 +16,8 @@ public class BranchDto implements Serializable {
     private String branchName;
 
     private String branchCountry;
+
+
 
     private String branchType;
 
@@ -30,7 +34,7 @@ public class BranchDto implements Serializable {
     public BranchDto(String branchName, String branchCountry) {
         this.branchName = branchName;
         this.branchCountry = branchCountry;
-        this.branchType= setBranchType();
+        this.branchType = COUNTRIES_EU.stream().anyMatch(c -> c.equalsIgnoreCase(branchCountry)) ? "EU" : "NOT EU";
 
     }
 
@@ -47,16 +51,27 @@ public class BranchDto implements Serializable {
     public String getBranchCountry() {
         return branchCountry;
     }
+
+    public String getBranchType() {
+        return branchType;
+    }
+    /*
+
     public String getBranchType() {
         return branchType;
     }
 
+     */
+
     //setter
 
 
+    /*
     public void setPk_BranchID(Integer pk_BranchID) {
         this.pk_BranchID = pk_BranchID;
     }
+
+     */
 
     public void setBranchName(String branchName) {
         this.branchName = branchName;
@@ -64,8 +79,13 @@ public class BranchDto implements Serializable {
 
     public void setBranchCountry(String branchCountry) {
         this.branchCountry = branchCountry;
+        this.branchType = COUNTRIES_EU.stream().anyMatch(c -> c.equalsIgnoreCase(branchCountry)) ? "EU" : "NOT EU";
     }
 
+
+
+
+        /*
     // METHOD TO KNOW IF COUNTRY IN PART OF EU
 
     public String setBranchType(){
@@ -75,12 +95,15 @@ public class BranchDto implements Serializable {
             this.branchType= "outside EU";
         };
         return this.branchType;
-    }
+    }    */
 
+    /*
     public Boolean isInEU() {
         // Check if the given country is in the array of EU member countries
         return (COUNTRIES_EU.contains(branchCountry));
     }
+
+     */
 
     @Override
     public String toString() {
