@@ -1,6 +1,7 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.service;
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.dto.FlowerDTO;
+import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.dto.Message;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -20,5 +21,5 @@ public interface WebClientFlowerServiceInterface {
     Mono<FlowerDTO> updateFlower(int id, FlowerDTO flowerDTO);
 
     // Delete a Flower by ID
-    Mono<Void> deleteFlower(int id);
+    Mono<String> deleteFlower(int id);
 }

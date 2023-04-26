@@ -1,6 +1,7 @@
 package cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.service;
 
 import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.dto.FlowerDTO;
+import cat.itacademy.barcelonactiva.zolischipantasig.anderson.s05.t01.n03.model.dto.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -42,12 +43,13 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
     }
 
     @Override
-    public Mono<Void> deleteFlower(int id) {
+    public Mono<String> deleteFlower(int id) {
         return webClient.delete()
                 .uri(uriBuilder -> uriBuilder.path(CLIENT_FLORS_DELETE).build(id))
                 .retrieve()
-                .bodyToMono(Void.class);
+                .bodyToMono(String.class);
     }
+
 
     @Override
     public Mono<FlowerDTO> getFlowerDtoById(int id) {

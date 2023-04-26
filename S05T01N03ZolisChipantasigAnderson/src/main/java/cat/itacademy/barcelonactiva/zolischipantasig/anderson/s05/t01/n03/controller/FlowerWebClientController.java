@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
+
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,8 +88,7 @@ public class FlowerWebClientController {
             description = "delete FLOWER from the database")
     @ApiResponses(value = {
 
-            @ApiResponse(responseCode = "200", description = "FLOWER DELETED."),
-            @ApiResponse(responseCode = "201", description = "FLOWER DELETED SUCCESSFULLY."),
+            @ApiResponse(responseCode = "200", description = "FLOWER DELETED SUCCESSFULLY."),
             @ApiResponse(responseCode = "404", description = "ERROR. THE ID ENTERED DOES NOT EXIST."),
     })
     @DeleteMapping("/clientFlorsDelete/{id}")
@@ -97,7 +96,7 @@ public class FlowerWebClientController {
         try {
             return new ResponseEntity<>(webClientFlowerServiceImplement.deleteFlower(id)
                     .map(flower -> new Message("FLOWER DELETED SUCCESSFULLY")),
-                    HttpStatus.CREATED);
+                    HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception( "Internal Server Error while deleting the flower", e.getCause());
         }
