@@ -111,11 +111,10 @@ public class FlowerWebClientController {
             @ApiResponse(responseCode = "404", description = "FLOWER NOT FOUND, NOT FOUND WITH ID  : '0'"),
     })
     @GetMapping("/clientFlorsGetOne/{id}")
-    public ResponseEntity<?> getFlowerByIdWebClient(@PathVariable(name = "id") int id) throws Exception {
+    public ResponseEntity<Mono<FlowerDTO>> getFlowerByIdWebClient(@PathVariable(name = "id") int id) throws Exception {
         try {
-            return new ResponseEntity<>(webClientFlowerServiceImplement.getFlowerDtoById(id)
-                    .map(flower -> new Message("Get One Flower")),
-                    HttpStatus.CREATED);
+            return new ResponseEntity<Mono<FlowerDTO>>(webClientFlowerServiceImplement.getFlowerDtoById(id),
+                    HttpStatus.OK);
         } catch (Exception e) {
             throw new Exception( "Internal Server Error while getting the flower", e.getCause());
         }

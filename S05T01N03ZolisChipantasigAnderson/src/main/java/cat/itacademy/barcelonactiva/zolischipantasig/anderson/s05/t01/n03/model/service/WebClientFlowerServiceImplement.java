@@ -54,10 +54,8 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
     @Override
     public Mono<FlowerDTO> getFlowerDtoById(int id) {
         return webClient.get()
-                .uri(CLIENT_FLORS_GET_ONE, id)
+                .uri(uriBuilder -> uriBuilder.path(CLIENT_FLORS_GET_ONE).build(id))
                 .retrieve()
-                /*.onStatus(httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
-                        clientResponse -> Mono.empty())*/
                 .bodyToMono(FlowerDTO.class);
 
     }
