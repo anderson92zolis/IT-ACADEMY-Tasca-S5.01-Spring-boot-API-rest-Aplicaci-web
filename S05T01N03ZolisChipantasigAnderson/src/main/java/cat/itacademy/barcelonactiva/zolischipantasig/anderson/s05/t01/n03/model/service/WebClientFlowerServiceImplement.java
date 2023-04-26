@@ -35,12 +35,19 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
     @Override
     public Mono<FlowerDTO> updateFlower(int id, FlowerDTO flowerDTO) {
         return webClient.put()
-                .uri(CLIENT_FLORS_UPDATE,id)
-                .body(Mono.just(flowerDTO), FlowerDTO.class)
+                .uri(uriBuilder -> uriBuilder.path(CLIENT_FLORS_UPDATE).build(id))
+                .syncBody(flowerDTO)
                 .retrieve()
                 .bodyToMono(FlowerDTO.class);
     }
 
+    @Override
+    public Mono<Void> deleteFlower(int id) {
+        return webClient.delete()
+                .uri(uriBuilder -> uriBuilder.path(CLIENT_FLORS_DELETE).build(id))
+                .retrieve()
+                .bodyToMono(Void.class);
+    }
 
     @Override
     public Mono<FlowerDTO> getFlowerDtoById(int id) {
@@ -61,13 +68,7 @@ public class WebClientFlowerServiceImplement implements WebClientFlowerServiceIn
                 .bodyToFlux(FlowerDTO.class);
     }
 
-    @Override
-    public Mono<Void> deleteFlower(int id) {
-        return webClient.delete()
-                .uri(CLIENT_FLORS_DELETE,id)
-                .retrieve()
-                .bodyToMono(Void.class);
-    }
+
 
 
 }

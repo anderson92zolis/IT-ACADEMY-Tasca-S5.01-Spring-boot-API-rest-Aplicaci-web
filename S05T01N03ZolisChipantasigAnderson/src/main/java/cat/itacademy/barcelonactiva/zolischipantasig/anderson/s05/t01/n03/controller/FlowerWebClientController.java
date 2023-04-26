@@ -68,7 +68,7 @@ public class FlowerWebClientController {
             @ApiResponse(responseCode = "404", description = "FLOWER NOT FOUND, NOT FOUND WITH ID : 'X'")
     })
     @PutMapping("/clientFlorsUpdate/{id}")
-    public ResponseEntity<?> updateFlowerWebClient(@PathVariable int id, @RequestBody FlowerDTO flowerDTO) throws Exception {
+    public ResponseEntity<Mono<Message>> updateFlowerWebClient(@PathVariable int id, @RequestBody FlowerDTO flowerDTO) throws Exception {
         // update the Flower
         try {
             return new ResponseEntity<>(webClientFlowerServiceImplement.updateFlower(id,flowerDTO)
@@ -89,10 +89,11 @@ public class FlowerWebClientController {
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "FLOWER DELETED."),
+            @ApiResponse(responseCode = "201", description = "FLOWER DELETED SUCCESSFULLY."),
             @ApiResponse(responseCode = "404", description = "ERROR. THE ID ENTERED DOES NOT EXIST."),
     })
     @DeleteMapping("/clientFlorsDelete/{id}")
-    public ResponseEntity<?> deleteFlowerWebClient(@PathVariable int id) throws Exception {
+    public ResponseEntity<Mono<Message>> deleteFlowerWebClient(@PathVariable int id) throws Exception {
         try {
             return new ResponseEntity<>(webClientFlowerServiceImplement.deleteFlower(id)
                     .map(flower -> new Message("FLOWER DELETED SUCCESSFULLY")),
